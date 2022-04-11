@@ -16,13 +16,14 @@ public class BeanCollectUtil {
      * collect all beans managed by spring and annotated with specific annotation and implements specific interface
      *
      * @param annotation specific annotation class.
-     * @param clazz specific bean class, could be null.
+     * @param clazz      specific bean class, could be null.
      * @return a map contains all beans managed by spring and meet all the criteria, note that key of returned map is bean name.
      */
-    public static Map<String, Object> collect(Class<? extends Annotation> annotation, Class<?> clazz) {
+    @SuppressWarnings("unchecked")
+    public static <T> Map<String, T> collect(Class<? extends Annotation> annotation, Class<T> clazz) {
         return SpringContextUtil.getBeansWithAnnotation(annotation).entrySet().stream()
                 .filter(entry -> Objects.isNull(clazz) || !entry.getValue().getClass().isInterface())
                 .filter(entry -> Objects.isNull(clazz) || Arrays.asList(entry.getValue().getClass().getInterfaces()).contains(clazz))
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+                .collect(Collectors.toMap(Map.Entry::getKey, entry -> (T) entry.getValue()));
     }
 }

@@ -21,38 +21,21 @@ public class SpringContextUtil implements ApplicationContextAware {
     }
 
     public static ApplicationContext getApplicationContext() {
+        validateContextInjected();
         return applicationContext;
     }
 
-    public static Object getBean(String name) {
-        return applicationContext.getBean(name);
-    }
-
-    public static <T> T getBean(Class<T> clazz) {
-        return applicationContext.getBean(clazz);
-    }
-
-    public static <T> Map<String, T> getBeans(Class<T> clazz) {
-        return applicationContext.getBeansOfType(clazz);
-    }
-
-    public static <T> Map<String, Object> getBeansWithAnnotation(Class<? extends Annotation> annotation) {
+    public static Map<String, Object> getBeansWithAnnotation(Class<? extends Annotation> annotation) {
+        if (annotation == null) {
+            return null;
+        }
+        validateContextInjected();
         return applicationContext.getBeansWithAnnotation(annotation);
     }
 
-    public static boolean containsBean(String name) {
-        return applicationContext.containsBean(name);
-    }
-
-    public static boolean isSingleton(String name) {
-        return applicationContext.isSingleton(name);
-    }
-
-    public static Class<?> getType(String name) {
-        return applicationContext.getType(name);
-    }
-
-    public static String[] getAliases(String name) {
-        return applicationContext.getAliases(name);
+    public static void validateContextInjected() {
+        if (applicationContext == null) {
+            throw new IllegalStateException("application context未注入");
+        }
     }
 }

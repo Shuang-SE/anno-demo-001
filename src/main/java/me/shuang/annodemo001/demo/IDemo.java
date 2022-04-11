@@ -5,5 +5,7 @@ package me.shuang.annodemo001.demo;
  * @since 2022年4月11日 12点50分
  */
 public interface IDemo {
-    void invoke();
+    String invoke();
+
+    String getName();
 }
