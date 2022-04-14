@@ -16,9 +16,9 @@ import me.shuang.annodemo001.meta.annotation.CustomColumnName;
 @AllArgsConstructor
 public class CustomClass {
 
-    @CustomColumnName("fieldA")
+    @CustomColumnName("${custom.infoMapping.a}")
     private String field1;
 
-    @CustomColumnName("fieldB")
+    @CustomColumnName("${custom.infoMapping.b}")
     private String field2;
 }

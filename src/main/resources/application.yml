@@ -1,4 +1,6 @@
 spring:
+  profiles:
+    include: custom
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher # deal with swagger 3 & springboot 2.6.* conflict problem.

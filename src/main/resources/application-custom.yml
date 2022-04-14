@@ -1,0 +1,9 @@
+custom:
+  infos:
+  - info: 1
+  - info: 2
+  - info: 3
+  infoMapping:
+    a: 1
+    b: 2
+    c: 3

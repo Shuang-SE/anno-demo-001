@@ -22,6 +22,9 @@ public class JsonUtil {
         if (obj == null) {
             return null;
         }
+        if (objectMapper == null) {
+            throw new NullPointerException("objectMapper is not injected yet.");
+        }
         try {
             return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(obj);
         } catch (JsonProcessingException e) {
@@ -31,6 +34,9 @@ public class JsonUtil {
     }
 
     public static <T> T parseObject(String json, Class<T> clazz) {
+        if (objectMapper == null) {
+            throw new NullPointerException("objectMapper is not injected yet.");
+        }
         try {
             return objectMapper.readValue(json, clazz);
         } catch (JsonProcessingException e) {
